@@ -3,12 +3,10 @@ Age Calculator : show age with years, months, days, hours, minutes and second.
 Code by SK Naing.
 You can use this code freely.
 */
-
 /*
 Do not change the code up to down or down to up.
 codeတွေကို အပေါ်အောက် သွားမပြောင်းပါနဲ့။
 */
-
 /*
 
 How to use the code?
@@ -45,7 +43,7 @@ timer1 ဆိုတဲ့နာမည်နဲ့ timer component ၁ခုadd�
 Add 1 Button and add the following codes to onClick.
 Button ၁ခုaddပြီး onClickမှာ အောက်ကcodeတွေကို ထည့်ပါ။
 
-Then you can run the project.
+Then you can run the project
 ပြီးရင် projectကို runလို့ ရပါပြီ။
 
 */
@@ -55,9 +53,6 @@ try {
 } catch(Exception e) {
 		 
 }
-//ရက်ထပ်နှစ်များ
-String leapString = ",1900,1904,1908,1912,1916,1920,1924,1928,1932,1936,1940,1944,1948,1952,1956,1960,1964,1968,1972,1976,1980,1984,1988,1992,1996,2000,2004,2008,2012,2016,2020,2024,2028,2032,2036,2040,2044,2048,2052,2056,2060,2064,2068,2072,2076,2080,2084,2088,2092,2096,2100,"; 
-
 //Age with Days
       double year = 0; 
 	 double yDay = 0; 
@@ -78,11 +73,14 @@ yDay = 365 * year;
 ရက်ထပ်နှစ်​တွေဆိုရင် 366ရက်ရှိလို့ ရက်ထပ်နှစ်​တွေမှာ 1​ပေါင်း။
 */ 
 nYear = Double.parseDouble(edittext_year.getText().toString()); 
+
+//ရက်ထပ်နှစ်
 /*
 1900က​နေ 2100အထိဘဲ အလုပ်လုပ်​မယ်။
 ကိုယ်အလုပ်လုပ်​စေချင်တဲ့ခုနှစ်အထိ ထပ်ထည့်လို့ရတယ်။
 */ 
-leapString = ",1900,1904,1908,1912,1916,1920,1924,1928,1932,1936,1940,1944,1948,1952,1956,1960,1964,1968,1972,1976,1980,1984,1988,1992,1996,2000,2004,2008,2012,2016,2020,2024,2028,2032,2036,2040,2044,2048,2052,2056,2060,2064,2068,2072,2076,2080,2084,2088,2092,2096,2100,"; 
+String leapString = ",1900,1904,1908,1912,1916,1920,1924,1928,1932,1936,1940,1944,1948,1952,1956,1960,1964,1968,1972,1976,1980,1984,1988,1992,1996,2000,2004,2008,2012,2016,2020,2024,2028,2032,2036,2040,2044,2048,2052,2056,2060,2064,2068,2072,2076,2080,2084,2088,2092,2096,2100,"; 
+
 for(int _repeat40 = 0; _repeat40 < (int)(year); _repeat40++) { 
 		if (leapString.contains(String.valueOf((long)(nYear)))) { 
 				yDay++; 
@@ -330,22 +328,18 @@ else {
         textview_week_result.setText(weeks + " weeks + " + remainingDays + " days");
 
 //Age with Hours, Minutes and Seconds
-
 //Age with Hours
 hour = yDay * 24;
 hour = hour + Double.parseDouble(new SimpleDateFormat("HH").format(calendar1.getTime()));
 textview_hour_result.setText(String.valueOf((long)(hour)).concat(" hours + ".concat(new SimpleDateFormat("mm").format(calendar1.getTime()).concat(" minutes"))));
-
 //Age with Minutes
 minute = hour * 60;
 minute = minute + Double.parseDouble(new SimpleDateFormat("mm").format(calendar1.getTime()));
 textview_minute_result.setText(String.valueOf((long)(minute)).concat(" minutes + ".concat(new SimpleDateFormat("ss").format(calendar1.getTime()).concat(" seconds"))));
-
 //Age with Second
 second = minute * 60;
 second = second + Double.parseDouble(new SimpleDateFormat("ss").format(calendar1.getTime()));
 textview_second_result.setText(String.valueOf((long)(second)).concat(" seconds"));
-
 //Realtime Minutes and Seconds
 timer1 = new TimerTask() {
 		@Override
@@ -421,11 +415,15 @@ else {
 textview_ymd_result.setText(String.valueOf((long)(ageYears)).concat(" years + ".concat(String.valueOf((long)(ageMonths)).concat(" months + ".concat(String.valueOf((long)(ageDays)).concat(" days"))))));
 
 /*
-This has more hours, minutes and seconds than some age calculators. This is because it takes into account the current hours, minutes and seconds. For example, if today is the 24th, some age calculators calculate until 12:00 on the 23rd. If it is the 24th, this also takes into account the current time of the 24th. For example, if the current time is 7 am on the 24th, this will be 7 hours more than some age calculators.
+This has more hours, minutes and seconds than some age calculators. This is because it takes into account the current hours, minutes and seconds. For example, if today is the 24th, some age calculators calculate until 12:00 on the 23rd. If it is the 24th, this also takes into account the current time of the 24th. For example, if the current time is 7 am on the 24th, this will be 7 hours more than some age calculators. 
 
 ဒီဟာက တစ်ချို့age calculatorတွေထက် hours, minutsနဲ့ secondတွေ ပိုများနေတက်တယ်။
 ဘာဖြစ်လို့လည်းဆိုတော့ ဒီဟာက ခုလက်ရှိ ရောက်နေတဲ့ hours, minutesနဲ့ secondsကိုပါ ထည့်တွက်ထားလို့ပါ။
 ဥပမာ ဒီနေ့က 24ရက်နေ့ဆိုရင် တချို့age calculatorတွေက 23ရက်နေ့ရဲ့ ည12နာရီအထိဘဲ တွက်ပေးတယ်။
 ဒီဟာကကျတော့ 24ရက်နေ့ဆိုရင် 24ရက်နေ့ရဲ့ ခုရောက်နေတဲ့အချိန်ကိုပါ ထည့်တွက်ပေးတယ်။
 ဥပမာ ခုရောက်နေ့တဲ့အချိန်က 24ရက်နေ့ရဲ့ မနက်7နာရီဆိုရင် ဒီဟာက တချို့age calculatorတွေထက် 7နာရီ ပိုများနေလိမ့်မယ်။
+*/
+/*
+Code Link
+https://raw.githubusercontent.com/mejoinpar333/ForShare/main/Age%20Calculator%20(Detail).txt
 */
