@@ -1,0 +1,429 @@
+/*
+Age Calculator : show age with years, months, days, hours, minutes and second.
+Code by SK Naing.
+You can use this code freely.
+*/
+
+/*
+Do not change the code up to down or down to up.
+codeတွေကို အပေါ်အောက် သွားမပြောင်းပါနဲ့။
+*/
+
+/*
+
+How to use the code?
+Codeအသုံးပြုနည်း။
+
+edittext_day
+edittext_month
+edittext_year
+Add 3 EditText with the 3 names mentioned above.
+အပေါ်ကid 3ခုနဲ့ EditText 3ခုaddပါ။
+
+textview_ymd_result
+textview_month_result
+textview_week_result
+textview_day_result
+textview_hour_result
+textview_minute_result
+textview_second_result
+Add 7 TextView with the 7 names mentioned above.
+အပေါ်ကid 7ခုနဲ့ TextView 7ခု​addပါ။
+
+hour
+minute
+second
+Add 3 Number Variable with the 3 names mentioned above.
+အပေါ်က နာမည် ၃ခုနဲ့ number variable ၃ခုaddပါ။
+
+Add 1 Calendar component with the name calendar1.
+calendar1 ဆိုတဲ့နာမည်နဲ့ Calendar component ၁ခုaddပါ။
+
+Add 1 timer component with the name timer1.
+timer1 ဆိုတဲ့နာမည်နဲ့ timer component ၁ခုaddပါ။
+
+Add 1 Button and add the following codes to onClick.
+Button ၁ခုaddပြီး onClickမှာ အောက်ကcodeတွေကို ထည့်ပါ။
+
+Then you can run the project.
+ပြီးရင် projectကို runလို့ ရပါပြီ။
+
+*/
+
+try {
+		timer1.cancel();
+} catch(Exception e) {
+		 
+}
+//ရက်ထပ်နှစ်များ
+String leapString = ",1900,1904,1908,1912,1916,1920,1924,1928,1932,1936,1940,1944,1948,1952,1956,1960,1964,1968,1972,1976,1980,1984,1988,1992,1996,2000,2004,2008,2012,2016,2020,2024,2028,2032,2036,2040,2044,2048,2052,2056,2060,2064,2068,2072,2076,2080,2084,2088,2092,2096,2100,"; 
+
+//Age with Days
+      double year = 0; 
+	 double yDay = 0; 
+	 double nYear = 0; 
+	 double birthMonth = 0; 
+	 String monthString = ""; 
+	 double nMonth = 0; 
+	 double nowMonth = 0; 
+	 String nowMMString = ""; 
+
+calendar1 = Calendar.getInstance(); 
+/*
+အသက်(နှစ်)ကိုတွက်ပြီး (နှစ်)ကို(ရက်)ဖြစ်​အောင် 365နဲ့​မြောက်။
+*/ 
+year = Double.parseDouble(new SimpleDateFormat("yyyy").format(calendar1.getTime())) - Double.parseDouble(edittext_year.getText().toString()); 
+yDay = 365 * year; 
+/*
+ရက်ထပ်နှစ်​တွေဆိုရင် 366ရက်ရှိလို့ ရက်ထပ်နှစ်​တွေမှာ 1​ပေါင်း။
+*/ 
+nYear = Double.parseDouble(edittext_year.getText().toString()); 
+/*
+1900က​နေ 2100အထိဘဲ အလုပ်လုပ်​မယ်။
+ကိုယ်အလုပ်လုပ်​စေချင်တဲ့ခုနှစ်အထိ ထပ်ထည့်လို့ရတယ်။
+*/ 
+leapString = ",1900,1904,1908,1912,1916,1920,1924,1928,1932,1936,1940,1944,1948,1952,1956,1960,1964,1968,1972,1976,1980,1984,1988,1992,1996,2000,2004,2008,2012,2016,2020,2024,2028,2032,2036,2040,2044,2048,2052,2056,2060,2064,2068,2072,2076,2080,2084,2088,2092,2096,2100,"; 
+for(int _repeat40 = 0; _repeat40 < (int)(year); _repeat40++) { 
+		if (leapString.contains(String.valueOf((long)(nYear)))) { 
+				yDay++; 
+		} 
+		nYear++; 
+} 
+
+/*
+1995ရဲ့ 5လပိုင်းမှာ ​မွေးတယ်ဆိုရင် 5လပိုင်းရဲ့ ​နောက်ကရက်တွေဘဲ တွက်ရမယ်။
+ဒါ​ပေမဲ့အ​ပေါ်ကcode​တွေမှာက 1နှစ်လုံးစာ 365လို့ ထည့်ပြီးတွက်ထားတဲ့အတွက် ​မွေးလရဲ့ ​ရှေ့လက ရက်​တွေကို ပြန်နှုတ်​ပေးမယ်။
+*/ 
+birthMonth = Double.parseDouble(edittext_month.getText().toString()); 
+nMonth = 0; 
+for(int _repeat101 = 0; _repeat101 < (int)((birthMonth - 1)); _repeat101++) { 
+		nMonth++; 
+		monthString = monthString.concat(",".concat(String.valueOf((long)(nMonth)))); 
+} 
+if (monthString.contains("1")) { 
+		yDay = yDay - 31; 
+} 
+if (monthString.contains("2")) { 
+		if (leapString.contains(edittext_year.getText().toString())) { 
+				yDay = yDay - 29; 
+		} 
+		else { 
+				yDay = yDay - 28; 
+		} 
+} 
+if (monthString.contains("3")) { 
+		yDay = yDay - 31; 
+} 
+if (monthString.contains("4")) { 
+		yDay = yDay - 30; 
+} 
+if (monthString.contains("5")) { 
+		yDay = yDay - 31; 
+} 
+if (monthString.contains("6")) { 
+		yDay = yDay - 30; 
+} 
+if (monthString.contains("7")) { 
+		yDay = yDay - 31; 
+} 
+if (monthString.contains("8")) { 
+		yDay = yDay - 31; 
+} 
+if (monthString.contains("9")) { 
+		yDay = yDay - 30; 
+} 
+if (monthString.contains("10")) { 
+		yDay = yDay - 31; 
+} 
+if (monthString.contains("11")) { 
+		yDay = yDay - 30; 
+} 
+if (monthString.contains("12")) { 
+		yDay = yDay - 31; 
+} 
+
+
+yDay = yDay - Double.parseDouble(edittext_day.getText().toString()); 
+
+
+/*
+ခု​ရောက်​နေတာက 2023ဆိုရင် အ​ပေါ်ကcode​တွေက 2022အထိဘဲ တွက်​ပေးတယ်။
+အဲ့ဒီ့​တော့ ခု​ရောက်​နေတဲ့ခုနှစ်ရဲ့ လ​တွေနဲ့ ရက်​တွေကို ထပ်​ပေါင်းထည့်ရမယ်။
+ဥပမာ လက်ရှိdateက 3လပိုင်း 20ရက်ဆိုရင် 1,2,3လ​ ​တွေမှာရှိတဲ့ ရက်​ပေါင်းနဲ့ 20ရက်ကို ​ပေါင်းပြီး အ​ပေါ်မှာရထားတဲ့ဟာနဲ့ ထပ်​ပေါင်း​ပေးရမယ်။
+*/ 
+nowMonth = Double.parseDouble(new SimpleDateFormat("MM").format(calendar1.getTime())); 
+nMonth = 0; 
+for(int _repeat229 = 0; _repeat229 < (int)((nowMonth - 1)); _repeat229++) { 
+		nMonth++; 
+		nowMMString = nowMMString.concat(",".concat(String.valueOf((long)(nMonth)))); 
+} 
+if (nowMMString.contains("1")) { 
+		yDay = yDay + 31; 
+} 
+if (nowMMString.contains("2")) { 
+		if (leapString.contains(edittext_year.getText().toString())) { 
+				yDay = yDay + 29; 
+		} 
+		else { 
+				yDay = yDay + 28; 
+		} 
+} 
+if (nowMMString.contains("3")) { 
+		yDay = yDay + 31; 
+} 
+if (nowMMString.contains("4")) { 
+		yDay = yDay + 30; 
+} 
+if (nowMMString.contains("5")) { 
+		yDay = yDay + 31; 
+} 
+if (nowMMString.contains("6")) { 
+		yDay = yDay + 30; 
+} 
+if (nowMMString.contains("7")) { 
+		yDay = yDay + 31; 
+} 
+if (nowMMString.contains("8")) { 
+		yDay = yDay + 31; 
+} 
+if (nowMMString.contains("9")) { 
+		yDay = yDay + 30; 
+} 
+if (monthString.contains("10")) { 
+		yDay = yDay + 31; 
+} 
+if (nowMMString.contains("11")) { 
+		yDay = yDay + 30; 
+} 
+if (nowMMString.contains("12")) { 
+		yDay = yDay + 31; 
+} 
+
+
+yDay = yDay + Double.parseDouble(new SimpleDateFormat("dd").format(calendar1.getTime())); 
+textview_day_result.setText(String.valueOf((long)(yDay)).concat(" days + ".concat(new SimpleDateFormat("HH").format(calendar1.getTime()).concat(" hours"))));
+
+//Age with Months
+     double startYear = 0;
+	 double endYear = 0;
+	 double ageYear = 0;
+	 double startMonth = 0;
+	 double endMonth = 0;
+	 double resultMonth = 0;
+	 double startDay = 0;
+	 double allDay = 0;
+	 String plusDay = "";
+	 double day2 = 0;
+
+
+startYear = Double.parseDouble(edittext_year.getText().toString());
+endYear = Double.parseDouble(new SimpleDateFormat("yyyy").format(calendar1.getTime())) - 1;
+ageYear = endYear - startYear;
+resultMonth = ageYear * 12;
+
+startMonth = Double.parseDouble(edittext_month.getText().toString());
+endMonth = Double.parseDouble(new SimpleDateFormat("MM").format(calendar1.getTime())) - 1;
+resultMonth = resultMonth + (12 - startMonth);
+resultMonth = resultMonth + endMonth;
+
+if (1 == Double.parseDouble(edittext_month.getText().toString())) {
+		startDay = 31 - Double.parseDouble(edittext_day.getText().toString());
+}
+if (2 == Double.parseDouble(edittext_month.getText().toString())) {
+		if (leapString.contains(edittext_year.getText().toString())) {
+				startDay = 29 - Double.parseDouble(edittext_day.getText().toString());
+		}
+		else {
+				startDay = 28 - Double.parseDouble(edittext_day.getText().toString());
+		}
+}
+if (3 == Double.parseDouble(edittext_month.getText().toString())) {
+		startDay = 31 - Double.parseDouble(edittext_day.getText().toString());
+}
+if (4 == Double.parseDouble(edittext_month.getText().toString())) {
+		startDay = 30 - Double.parseDouble(edittext_day.getText().toString());
+}
+if (5 == Double.parseDouble(edittext_month.getText().toString())) {
+		startDay = 31 - Double.parseDouble(edittext_day.getText().toString());
+}
+if (6 == Double.parseDouble(edittext_month.getText().toString())) {
+		startDay = 30 - Double.parseDouble(edittext_day.getText().toString());
+}
+if (7 == Double.parseDouble(edittext_month.getText().toString())) {
+		startDay = 31 - Double.parseDouble(edittext_day.getText().toString());
+}
+if (8 == Double.parseDouble(edittext_month.getText().toString())) {
+		startDay = 31 - Double.parseDouble(edittext_day.getText().toString());
+}
+if (9 == Double.parseDouble(edittext_month.getText().toString())) {
+		startDay = 30 - Double.parseDouble(edittext_day.getText().toString());
+}
+if (10 == Double.parseDouble(edittext_month.getText().toString())) {
+		startDay = 31 - Double.parseDouble(edittext_day.getText().toString());
+}
+if (11 == Double.parseDouble(edittext_month.getText().toString())) {
+		startDay = 30 - Double.parseDouble(edittext_day.getText().toString());
+}
+if (12 == Double.parseDouble(edittext_month.getText().toString())) {
+		startDay = 31 - Double.parseDouble(edittext_day.getText().toString());
+}
+allDay = startDay + Double.parseDouble(new SimpleDateFormat("dd").format(calendar1.getTime()));
+
+if ("02".contains(new SimpleDateFormat("MM").format(calendar1.getTime()))) {
+		if (leapString.contains(edittext_year.getText().toString())) {
+				if (28 < allDay) {
+						resultMonth++;
+						day2 = allDay - 29;
+				}
+				else {
+						plusDay = " + ".concat(String.valueOf((long)(allDay)).concat(" days"));
+				}
+		}
+		else {
+				if (27 < allDay) {
+						resultMonth++;
+						day2 = allDay - 28;
+				}
+				else {
+						plusDay = " + ".concat(String.valueOf((long)(allDay)).concat(" dys"));
+				}
+		}
+}
+if ("04,06,09,11".contains(new SimpleDateFormat("MM").format(calendar1.getTime()))) {
+		if (29 < allDay) {
+				resultMonth++;
+				day2 = allDay - 30;
+		}
+		else {
+				plusDay = " + ".concat(String.valueOf((long)(allDay)).concat(" days"));
+		}
+}
+if ("01,03,05,07,08,10,12".contains(new SimpleDateFormat("MM").format(calendar1.getTime()))) {
+		if (30 < allDay) {
+				resultMonth++;
+				day2 = allDay - 31;
+		}
+		else {
+				plusDay = " + ".concat(String.valueOf((long)(allDay)).concat(" days"));
+		}
+}
+if ("".equals(plusDay)) {
+		if (1 > day2) {
+				textview_month_result.setText(String.valueOf((long)(resultMonth)).concat(" months + 0 days"));
+		}
+		else {
+				plusDay = " + ".concat(String.valueOf((long)(day2)).concat(" days"));
+				textview_month_result.setText(String.valueOf((long)(resultMonth)).concat(" months").concat(plusDay));
+		}
+}
+else {
+		textview_month_result.setText(String.valueOf((long)(resultMonth)).concat(" months").concat(plusDay));
+}
+
+//Age with Weaks
+        int totalDays = (int)yDay;
+        int daysInAWeek = 7;
+
+        int weeks = totalDays / daysInAWeek;
+        int remainingDays = totalDays % daysInAWeek;
+
+        textview_week_result.setText(weeks + " weeks + " + remainingDays + " days");
+
+//Age with Hours, Minutes and Seconds
+
+//Age with Hours
+hour = yDay * 24;
+hour = hour + Double.parseDouble(new SimpleDateFormat("HH").format(calendar1.getTime()));
+textview_hour_result.setText(String.valueOf((long)(hour)).concat(" hours + ".concat(new SimpleDateFormat("mm").format(calendar1.getTime()).concat(" minutes"))));
+
+//Age with Minutes
+minute = hour * 60;
+minute = minute + Double.parseDouble(new SimpleDateFormat("mm").format(calendar1.getTime()));
+textview_minute_result.setText(String.valueOf((long)(minute)).concat(" minutes + ".concat(new SimpleDateFormat("ss").format(calendar1.getTime()).concat(" seconds"))));
+
+//Age with Second
+second = minute * 60;
+second = second + Double.parseDouble(new SimpleDateFormat("ss").format(calendar1.getTime()));
+textview_second_result.setText(String.valueOf((long)(second)).concat(" seconds"));
+
+//Realtime Minutes and Seconds
+timer1 = new TimerTask() {
+		@Override
+		public void run() {
+				runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+								second++;
+								textview_second_result.setText(String.valueOf((long)(second)).concat(" seconds"));
+								
+								calendar1 = Calendar.getInstance();
+								textview_minute_result.setText(String.valueOf((long)(minute)).concat(" minutes + ".concat(new SimpleDateFormat("ss").format(calendar1.getTime()).concat(" seconds"))));
+								if (00 == Double.parseDouble(new SimpleDateFormat("ss").format(calendar1.getTime()))) {
+										minute++;
+										textview_minute_result.setText(String.valueOf((long)(minute)).concat(" minutes + ".concat(new SimpleDateFormat("ss").format(calendar1.getTime()).concat(" seconds"))));
+										textview_hour_result.setText(String.valueOf((long)(hour)).concat(" hours + ".concat(new SimpleDateFormat("mm").format(calendar1.getTime()).concat(" minutes"))));
+								}
+						}
+				});
+		}
+};
+_timer.scheduleAtFixedRate(timer1, (int)(0), (int)(1000));
+
+//years, months, days Format
+     double ageYears = 0;
+	 double ageMonths = 0;
+	 double ageDays = 0;
+	 double edittext_years = 0;
+	 double edittext_months = 0;
+	 double totalDayOfMonth = 0;
+	 
+if ("02".contains(new SimpleDateFormat("MM").format(calendar1.getTime()))) {
+			if (leapString.contains(edittext_year.getText().toString())) {
+					    totalDayOfMonth =29;
+				}
+		else {
+						totalDayOfMonth = 28;
+					  }	  
+	}
+	
+if ("04,06,09,11".contains(new SimpleDateFormat("MM").format(calendar1.getTime()))) {
+			totalDayOfMonth = 30;
+}
+
+if ("01,03,05,07,08,10,12".contains(new SimpleDateFormat("MM").format(calendar1.getTime()))) {
+			totalDayOfMonth = 31;
+}
+
+ageYears = Double.parseDouble(new SimpleDateFormat("yyyy").format(calendar1.getTime())) - Double.parseDouble(edittext_year.getText().toString());
+if (Double.parseDouble(edittext_month.getText().toString()) > Double.parseDouble(new SimpleDateFormat("MM").format(calendar1.getTime()))) {
+		ageYears--;
+		ageMonths = Double.parseDouble(edittext_month.getText().toString()) - Double.parseDouble(new SimpleDateFormat("MM").format(calendar1.getTime()));
+		ageMonths = 12 - ageMonths;
+}
+else {
+		ageMonths = Double.parseDouble(new SimpleDateFormat("MM").format(calendar1.getTime())) - Double.parseDouble(edittext_month.getText().toString());
+}
+if (Double.parseDouble(edittext_day.getText().toString()) > Double.parseDouble(new SimpleDateFormat("dd").format(calendar1.getTime()))) {
+		ageMonths--;
+		ageDays = Double.parseDouble(edittext_day.getText().toString()) - Double.parseDouble(new SimpleDateFormat("dd").format(calendar1.getTime()));
+		ageDays = totalDayOfMonth - ageDays;
+}
+else {
+		ageDays = Double.parseDouble(new SimpleDateFormat("dd").format(calendar1.getTime())) - Double.parseDouble(edittext_day.getText().toString());
+}
+if (0 > ageMonths) {
+		ageYears--;
+		ageMonths = 12 + ageMonths;
+}
+else {
+		
+}
+textview_ymd_result.setText(String.valueOf((long)(ageYears)).concat(" years + ".concat(String.valueOf((long)(ageMonths)).concat(" months + ".concat(String.valueOf((long)(ageDays)).concat(" days"))))));
+
+/*
+ဒီဟာက တစ်ချို့age calculatorတွေထက် hours, minutsနဲ့ secondတွေ ပိုများနေတက်တယ်။
+ဘာဖြစ်လို့လည်းဆိုတော့ ဒီဟာက ခုလက်ရှိ ရောက်နေတဲ့ hours, minutesနဲ့ secondsကိုပါ ထည့်တွက်ထားလို့ပါ။
+ဥပမာ ဒီနေ့က 24ရက်နေ့ဆိုရင် တချို့age calculatorတွေက 23ရက်နေ့ရဲ့ ည12နာရီအထိဘဲ တွက်ပေးတယ်။
+ဒီဟာကကျတော့ 24ရက်နေ့ဆိုရင် 24ရက်နေ့ရဲ့ ခုရောက်နေတဲ့အချိန်ကိုပါ ထည့်တွက်ပေးတယ်။
+ဥပမာ ခုရောက်နေ့တဲ့အချိန်က 24ရက်နေ့ရဲ့ မနက်7နာရီဆိုရင် ဒီဟာက တချို့age calculatorတွေထက် 7နာရီ ပိုများနေလိမ့်မယ်။
+*/
