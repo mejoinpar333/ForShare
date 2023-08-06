@@ -421,6 +421,8 @@ else {
 textview_ymd_result.setText(String.valueOf((long)(ageYears)).concat(" years + ".concat(String.valueOf((long)(ageMonths)).concat(" months + ".concat(String.valueOf((long)(ageDays)).concat(" days"))))));
 
 /*
+This has more hours, minutes and seconds than some age calculators. This is because it takes into account the current hours, minutes and seconds. For example, if today is the 24th, some age calculators calculate until 12:00 on the 23rd. If it is the 24th, this also takes into account the current time of the 24th. For example, if the current time is 7 am on the 24th, this will be 7 hours more than some age calculators.
+
 ဒီဟာက တစ်ချို့age calculatorတွေထက် hours, minutsနဲ့ secondတွေ ပိုများနေတက်တယ်။
 ဘာဖြစ်လို့လည်းဆိုတော့ ဒီဟာက ခုလက်ရှိ ရောက်နေတဲ့ hours, minutesနဲ့ secondsကိုပါ ထည့်တွက်ထားလို့ပါ။
 ဥပမာ ဒီနေ့က 24ရက်နေ့ဆိုရင် တချို့age calculatorတွေက 23ရက်နေ့ရဲ့ ည12နာရီအထိဘဲ တွက်ပေးတယ်။
