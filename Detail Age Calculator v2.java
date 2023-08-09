@@ -1,5 +1,6 @@
 /*
 Age Calculator : show age with years, months, days, hours, minutes and second.
+This project can work in android 8 and higher. Don't work in android 7 and lower.
 Code by SK Naing.
 You can use this code freely.
 */
@@ -9,7 +10,10 @@ codeတွေကို အပေါ်အောက် သွားမပြေ�
 */
 /*
 
-How to use the code?
+Code Link
+https://raw.githubusercontent.com/mejoinpar333/ForShare/main/Detail%20Age%20Calculator%20v2.java
+
+How to use this code?
 Codeအသုံးပြုနည်း။
 
 edittext_birth_day
@@ -27,6 +31,11 @@ textview_total_minute
 textview_total_second
 Add 7 TextView with the 7 names mentioned above.
 အပေါ်ကid 7ခုနဲ့ TextView 7ခု​addပါ။
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.time.Period;
+//imports
 
 totalHours
 totalMinutes
@@ -49,23 +58,22 @@ Then you can run the project
 */
 
 try {
-timer1.cancel();
+		timer1.cancel();
 } catch(Exception e) {
-
+		 
 }
 
-double birth_day = Double.parseDouble(edittext_birth_day.getText().toString());
-double birth_month = Double.parseDouble(edittext_birth_month.getText().toString());
-double birth_year = Double.parseDouble(edittext_birth_year.getText().toString());
+birth_day = Double.parseDouble(edittext_birth_day.getText().toString());
+birth_month = Double.parseDouble(edittext_birth_month.getText().toString());
+birth_year = Double.parseDouble(edittext_birth_year.getText().toString());
 calendar1 = Calendar.getInstance();
-double now_day = Double.parseDouble(new SimpleDateFormat("dd").format(calendar1.getTime()));
-double now_month = Double.parseDouble(new SimpleDateFormat("MM").format(calendar1.getTime()));
-double now_year = Double.parseDouble(new SimpleDateFormat("yyyy").format(calendar1.getTime()));
-double now_hour = Double.parseDouble(new SimpleDateFormat("HH").format(calendar1.getTime()));
-double now_minute = Double.parseDouble(new SimpleDateFormat("mm").format(calendar1.getTime()));
-double now_second = Double.parseDouble(new SimpleDateFormat("ss").format(calendar1.getTime()));
+now_day = Double.parseDouble(new SimpleDateFormat("dd").format(calendar1.getTime()));
+now_month = Double.parseDouble(new SimpleDateFormat("MM").format(calendar1.getTime()));
+now_year = Double.parseDouble(new SimpleDateFormat("yyyy").format(calendar1.getTime()));
+now_hour = Double.parseDouble(new SimpleDateFormat("HH").format(calendar1.getTime()));
+now_minute = Double.parseDouble(new SimpleDateFormat("mm").format(calendar1.getTime()));
+now_second = Double.parseDouble(new SimpleDateFormat("ss").format(calendar1.getTime()));
 
-//Total Days
 int birth_day2 = (int)birth_day;
 int birth_month2 = (int)birth_month;
 int birth_year2 = (int)birth_year;
@@ -73,6 +81,20 @@ int birth_year2 = (int)birth_year;
 int now_day2 = (int)now_day;
 int now_month2 = (int)now_month;
 int now_year2 = (int)now_year;
+
+//years, months, days Format
+LocalDate startDates = LocalDate.of(birth_year2, birth_month2, birth_day2);
+        LocalDate endDates = LocalDate.of(now_year2, now_month2, now_day2);
+        
+        Period period = Period.between(startDates, endDates);
+        
+        int years = period.getYears();
+        int months = period.getMonths();
+        int days = period.getDays();
+        
+        textview_yyyy_MM_dd.setText(years + " years + " + months + " months + " + days + " days");
+
+//Total Days
 LocalDate startDate = LocalDate.of(birth_year2, birth_month2, birth_day2);
         LocalDate endDate = LocalDate.of(now_year2, now_month2, now_day2);
 
@@ -89,22 +111,22 @@ textview_total_days.setText(textview_total_days.getText().toString().concat(" + 
         int remainingDays = totalDays % daysInAWeek;
 
         textview_total_weeks.setText(weeks + " weeks + " + remainingDays + " days");
-
-/*
-Before calculating Total Weeks, must first calculate Total Days.
-*/
+		
+		/*
+		Before calculating Total Weeks, must first calculate Total Days.
+		*/
 
 //Total Months
      double startYear = 0;
-double endYear = 0;
-double ageYear = 0;
-double startMonth = 0;
-double endMonth = 0;
-double resultMonth = 0;
-double startDay = 0;
-double allDay = 0;
-String plusDay = "";
-double day2 = 0;
+	 double endYear = 0;
+	 double ageYear = 0;
+	 double startMonth = 0;
+	 double endMonth = 0;
+	 double resultMonth = 0;
+	 double startDay = 0;
+	 double allDay = 0;
+	 String plusDay = "";
+	 double day2 = 0;
 
 
 startYear = birth_year;
@@ -118,185 +140,132 @@ resultMonth = resultMonth + (12 - startMonth);
 resultMonth = resultMonth + endMonth;
 
 if ("04,06,09,11".contains(String.valueOf((long)(now_month)))) {
-startDay = 30 - birth_day;
+	startDay = 30 - birth_day;
 }
 
 if ("01,03,05,07,08,10,12".contains(String.valueOf((long)(now_month)))) {
-startDay = 31 - birth_day;
+	startDay = 31 - birth_day;
 }
 
 if (2 == birth_month) {
-int input_year = (int)birth_year;
-        boolean isLeapYear = false;
-
-        if ((input_year % 4 == 0 && input_year % 100 != 0) || input_year % 400 == 0) {
-            isLeapYear = true;
-        }
-
-        if (isLeapYear) {
-            //leap year
-     startDay = 29 - birth_day;
-        } else {
-            //not leap year
-startDay = 28 - birth_day;
-        }
+		int input_year = (int)birth_year;
+	        boolean isLeapYear = false;
+	
+	        if ((input_year % 4 == 0 && input_year % 100 != 0) || input_year % 400 == 0) {
+		            isLeapYear = true;
+		        }
+	
+	        if (isLeapYear) {
+		            //leap year
+			     startDay = 29 - birth_day;
+		        } else {
+		            //not leap year
+			 	startDay = 28 - birth_day;
+		        }
 }
 
 allDay = startDay + now_day;
 
 if ("02".contains(String.valueOf((long)(now_month)))) {
-int input_year = (int)birth_year;
-        boolean isLeapYear = false;
-
-        if ((input_year % 4 == 0 && input_year % 100 != 0) || input_year % 400 == 0) {
-            isLeapYear = true;
-        }
-
-       if (isLeapYear) {
-            //leap year
-      if (28 < allDay) {
-resultMonth++;
-day2 = allDay - 29;
-   }
-else {
-plusDay = " + ".concat(String.valueOf((long)(allDay)).concat(" days"));
-   }
-        } else {
-            //not leap year
-  if (27 < allDay) {
-resultMonth++;
-day2 = allDay - 28;
-   }
-  else {
-plusDay = " + ".concat(String.valueOf((long)(allDay)).concat(" dys"));
-   }
-        }
+		int input_year = (int)birth_year;
+	        boolean isLeapYear = false;
+	
+	        if ((input_year % 4 == 0 && input_year % 100 != 0) || input_year % 400 == 0) {
+		            isLeapYear = true;
+		        }
+	
+	       if (isLeapYear) {
+		            //leap year
+			      if (28 < allDay) {
+						resultMonth++;
+						day2 = allDay - 29;
+				   }
+				else {
+						plusDay = " + ".concat(String.valueOf((long)(allDay)).concat(" days"));
+					   }
+		        } else {
+		            //not leap year
+			  	if (27 < allDay) {
+						resultMonth++;
+						day2 = allDay - 28;
+				   }
+			  	else {
+						plusDay = " + ".concat(String.valueOf((long)(allDay)).concat(" dys"));
+					   }
+		        }
 }
 if ("04,06,09,11".contains(String.valueOf((long)(now_month)))) {
-if (29 < allDay) {
-resultMonth++;
-day2 = allDay - 30;
-}
-else {
-plusDay = " + ".concat(String.valueOf((long)(allDay)).concat(" days"));
-}
+		if (29 < allDay) {
+				resultMonth++;
+				day2 = allDay - 30;
+		}
+		else {
+				plusDay = " + ".concat(String.valueOf((long)(allDay)).concat(" days"));
+		}
 }
 if ("01,03,05,07,08,10,12".contains(String.valueOf((long)(now_month)))) {
-if (30 < allDay) {
-resultMonth++;
-day2 = allDay - 31;
-}
-else {
-plusDay = " + ".concat(String.valueOf((long)(allDay)).concat(" days"));
-}
+		if (30 < allDay) {
+				resultMonth++;
+				day2 = allDay - 31;
+		}
+		else {
+				plusDay = " + ".concat(String.valueOf((long)(allDay)).concat(" days"));
+		}
 }
 if ("".equals(plusDay)) {
-if (1 > day2) {
-textview_total_months.setText(String.valueOf((long)(resultMonth)).concat(" months + 0 days"));
+		if (1 > day2) {
+				textview_total_months.setText(String.valueOf((long)(resultMonth)).concat(" months + 0 days"));
+		}
+		else {
+				plusDay = " + ".concat(String.valueOf((long)(day2)).concat(" days"));
+				textview_total_months.setText(String.valueOf((long)(resultMonth)).concat(" months").concat(plusDay));
+		}
 }
 else {
-plusDay = " + ".concat(String.valueOf((long)(day2)).concat(" days"));
-textview_total_months.setText(String.valueOf((long)(resultMonth)).concat(" months").concat(plusDay));
-}
-}
-else {
-textview_total_months.setText(String.valueOf((long)(resultMonth)).concat(" months").concat(plusDay));
+		textview_total_months.setText(String.valueOf((long)(resultMonth)).concat(" months").concat(plusDay));
 }
 
 //Total Hours, Minutes and Seconds
 //Age with Hours
 totalHours = (double)daysBetween * 24;
-totalHours = totalHours + now_hour ;
+totalHours = totalHours + now_hour
+;
 textview_total_hours.setText(String.valueOf((long)(totalHours)).concat(" hours + ".concat(new SimpleDateFormat("mm").format(calendar1.getTime()).concat(" minutes"))));
 
 //Age with Minutes
 totalMinutes = totalHours * 60;
-totalMinutes = totalMinutes + now_minute ;
+totalMinutes = totalMinutes + now_minute
+;
 textview_total_minutes.setText(String.valueOf((long)(totalMinutes)).concat(" minutess + ".concat(new SimpleDateFormat("ss").format(calendar1.getTime()).concat(" seconds"))));
 
 //Age with Second
 totalSeconds = totalMinutes * 60;
-totalSeconds = totalSeconds + now_second ;
+totalSeconds = totalSeconds + now_second
+;
 textview_total_seconds.setText(String.valueOf((long)(totalSeconds)).concat(" seconds"));
 
 //Realtime Minutes and Seconds
 timer1 = new TimerTask() {
-@Override
-public void run() {
-runOnUiThread(new Runnable() {
-@Override
-public void run() {
-totalSeconds++;
-textview_total_seconds.setText(String.valueOf((long)(totalSeconds)).concat(" seconds"));
-
-calendar1 = Calendar.getInstance();
-textview_total_minutes.setText(String.valueOf((long)(totalMinutes)).concat(" minutes + ".concat(new SimpleDateFormat("ss").format(calendar1.getTime()).concat(" seconds"))));
-if (00 == Double.parseDouble(new SimpleDateFormat("ss").format(calendar1.getTime()))) {
-totalMinutes++;
-textview_total_minutes.setText(String.valueOf((long)(totalMinutes)).concat(" minutes + ".concat(new SimpleDateFormat("ss").format(calendar1.getTime()).concat(" seconds"))));
-textview_total_hours.setText(String.valueOf((long)(totalHours)).concat(" hours + ".concat(new SimpleDateFormat("mm").format(calendar1.getTime()).concat(" minutes"))));
-}
-}
-});
-}
+		@Override
+		public void run() {
+				runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+								totalSeconds++;
+								textview_total_seconds.setText(String.valueOf((long)(totalSeconds)).concat(" seconds"));
+								
+								calendar1 = Calendar.getInstance();
+								textview_total_minutes.setText(String.valueOf((long)(totalMinutes)).concat(" minutes + ".concat(new SimpleDateFormat("ss").format(calendar1.getTime()).concat(" seconds"))));
+								if (00 == Double.parseDouble(new SimpleDateFormat("ss").format(calendar1.getTime()))) {
+										totalMinutes++;
+										textview_total_minutes.setText(String.valueOf((long)(totalMinutes)).concat(" minutes + ".concat(new SimpleDateFormat("ss").format(calendar1.getTime()).concat(" seconds"))));
+										textview_total_hours.setText(String.valueOf((long)(totalHours)).concat(" hours + ".concat(new SimpleDateFormat("mm").format(calendar1.getTime()).concat(" minutes"))));
+								}
+						}
+				});
+		}
 };
 _timer.scheduleAtFixedRate(timer1, (int)(0), (int)(1000));
-
-//years, months, days Format
-     double yyyyMMddYears = 0;
-double yyyyMMddMonths = 0;
-     double yyyyMMddDays = 0;
-double totalDayOfMonth = 0;
-
-if ("02".contains(String.valueOf((long)(now_month)))) {
-int input_year = (int)birth_year;
-        boolean isLeapYear = false;
-
-        if ((input_year % 4 == 0 && input_year % 100 != 0) || input_year % 400 == 0) {
-            isLeapYear = true;
-        }
-
-        if (isLeapYear) {
-            //leap year
-     totalDayOfMonth =29;
-        } else {
-            //not leap year
-totalDayOfMonth =28;
-               }
-}
-
-if ("04,06,09,11".contains(String.valueOf((long)(now_month)))) {
-totalDayOfMonth = 30;
-}
-
-if ("01,03,05,07,08,10,12".contains(String.valueOf((long)(now_month)))) {
-totalDayOfMonth = 31;
-} 
-yyyyMMddYears = now_year - birth_year;
-if (birth_month > now_month) {
-yyyyMMddYears--;
-yyyyMMddMonths = birth_month - now_month;
-yyyyMMddMonths = 12 - yyyyMMddMonths;
-}
-else {
-yyyyMMddMonths = now_month - birth_month;
-}
-if (birth_day > now_day) {
-yyyyMMddMonths--;
-yyyyMMddDays = birth_day - now_day;
-yyyyMMddDays = totalDayOfMonth - yyyyMMddDays;
-}
-else {
-yyyyMMddDays = now_day - birth_day;
-}
-if (0 > yyyyMMddMonths) {
-yyyyMMddYears--;
-yyyyMMddMonths = 12 + yyyyMMddMonths;
-}
-else {
-
-}
-textview_yyyy_MM_dd.setText(String.valueOf((long)(yyyyMMddYears)).concat(" years + ".concat(String.valueOf((long)(yyyyMMddMonths)).concat(" months + ".concat(String.valueOf((long)(yyyyMMddDays)).concat(" days"))))));
 
 
 /*
